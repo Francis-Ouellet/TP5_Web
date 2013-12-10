@@ -12,80 +12,82 @@ import javax.ws.rs.core.Response;
 
 /**
  * Classe regroupant des méthodes statiques d'accès aux données
+ *
  * @author Francis Ouellet & Marc-Antoine Bouchard
  */
 public class UtilitaireTwitface {
-    
-    public static ArrayList<Membre> obtenirListeMembres(int debut, int max, String nom){
-        
+
+    public static ArrayList<Membre> obtenirListeMembres(int debut, int max, String nom) {
+
         String nomDS = "jdbc/twitface";
         RequeteBD reqBD = new RequeteBD(nomDS);
-        try{
-            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
-                    " FROM membres " +
-                    " WHERE MemNom LIKE '%" + nom.trim() + "%'" + 
-                    " ORDER BY MemNom" +
-                    " LIMIT " + debut + "," + max;
-            
-            reqBD.obtenirConnexion();      
+        try {
+
+            reqBD.obtenirConnexion();
+
+            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil "
+                    + " FROM membres "
+                    + " WHERE MemNom LIKE '%" + nom.trim() + "%'"
+                    + " ORDER BY MemNom"
+                    + " LIMIT " + debut + "," + max;
+
+            reqBD.obtenirConnexion();
             ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
-            
+
             ArrayList<Membre> lstMembresTrouves = new ArrayList<Membre>();
-            
+
             Membre membre;
-            
-            while(resReq.next()){
-               membre = new Membre(
-                       resReq.getString("MemNom"),
-                       resReq.getString("MemVilleOrigine"),
-                       resReq.getString("MemVilleActuelle"),
-                       resReq.getString("MemCourriel"),
-                       resReq.getString("MemNomUtil"));
-               lstMembresTrouves.add(membre);
+
+            while (resReq.next()) {
+                membre = new Membre(
+                        resReq.getString("MemNom"),
+                        resReq.getString("MemVilleOrigine"),
+                        resReq.getString("MemVilleActuelle"),
+                        resReq.getString("MemCourriel"),
+                        resReq.getString("MemNomUtil"));
+                lstMembresTrouves.add(membre);
             }
-            
-            
+
+
             reqBD.fermerConnexion();
             return lstMembresTrouves;
-        }
-        catch (Exception e){
-            reqBD.fermerConnexion();
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        
-    }
-    
-    public static Membre obtenirInfoMembre(String nomUtil) {
-        String nomDS = "jdbc/twitface";
-        RequeteBD reqBD = new RequeteBD(nomDS);
-        
-        try{
-            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
-                    " FROM membres " +
-                    " WHERE MemNomUtil = '" + nomUtil + "'";
-            
-            reqBD.obtenirConnexion();      
-            ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
-            
-            Membre membre = null;
-            
-            resReq.next();
-            
-            membre = new Membre(
-                       resReq.getString("MemNom"),
-                       resReq.getString("MemVilleOrigine"),
-                       resReq.getString("MemVilleActuelle"),
-                       resReq.getString("MemCourriel"),
-                       resReq.getString("MemNomUtil"));
-            
-            reqBD.fermerConnexion();
-            return membre;
-            
         } catch (Exception e) {
             reqBD.fermerConnexion();
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
 
     }
-    
+
+    public static Membre obtenirInfoMembre(String nomUtil) {
+        String nomDS = "jdbc/twitface";
+        RequeteBD reqBD = new RequeteBD(nomDS);
+
+        try {
+            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil "
+                    + " FROM membres "
+                    + " WHERE MemNomUtil = '" + nomUtil + "'";
+
+            reqBD.obtenirConnexion();
+            ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
+
+            Membre membre = null;
+
+            resReq.next();
+
+            membre = new Membre(
+                    resReq.getString("MemNom"),
+                    resReq.getString("MemVilleOrigine"),
+                    resReq.getString("MemVilleActuelle"),
+                    resReq.getString("MemCourriel"),
+                    resReq.getString("MemNomUtil"));
+
+            reqBD.fermerConnexion();
+            return membre;
+
+        } catch (Exception e) {
+            reqBD.fermerConnexion();
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+    }
 }
