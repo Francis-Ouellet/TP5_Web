@@ -30,9 +30,8 @@ public class UtilitaireTwitface {
                     " ORDER BY MemNom" +
                     " LIMIT " + debut + "," + max;
             
+            reqBD.obtenirConnexion();      
             ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
-            
-            reqBD.fermerConnexion();
             
             ArrayList<Membre> lstMembresTrouves = new ArrayList<Membre>();
             
@@ -48,9 +47,12 @@ public class UtilitaireTwitface {
                lstMembresTrouves.add(membre);
             }
             
+            
+            reqBD.fermerConnexion();
             return lstMembresTrouves;
         }
         catch (Exception e){
+            reqBD.fermerConnexion();
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         
