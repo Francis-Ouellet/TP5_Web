@@ -55,4 +55,37 @@ public class UtilitaireTwitface {
         
     }
     
+    public static Membre obtenirInfoMembre(String nomUtil) {
+        String nomDS = "jdbc/twitface";
+        RequeteBD reqBD = new RequeteBD(nomDS);
+        
+        try{
+            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
+                    " FROM membres " +
+                    " WHERE MemNomUtil = '" + nomUtil + "'";
+            
+            reqBD.obtenirConnexion();      
+            ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
+            
+            Membre membre = null;
+            
+            resReq.next();
+            
+            membre = new Membre(
+                       resReq.getString("MemNom"),
+                       resReq.getString("MemVilleOrigine"),
+                       resReq.getString("MemVilleActuelle"),
+                       resReq.getString("MemCourriel"),
+                       resReq.getString("MemNomUtil"));
+            
+            reqBD.fermerConnexion();
+            return membre;
+            
+        } catch (Exception e) {
+            reqBD.fermerConnexion();
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+
+    }
+    
 }

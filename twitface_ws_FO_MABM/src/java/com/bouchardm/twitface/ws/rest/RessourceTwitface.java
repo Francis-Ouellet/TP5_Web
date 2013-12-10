@@ -43,5 +43,19 @@ public class RessourceTwitface {
         catch(Exception e){
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-    } 
+    }
+    
+    @GET
+    @Path("/membres/{nomUtil}")
+    @Produces("application/xml")
+    public Membre obtenirInfoMembre(@PathParam("nomUtil") String nomUtil) 
+    {
+        try {
+            Membre info = UtilitaireTwitface.obtenirInfoMembre(nomUtil);
+            return info;
+        }
+        catch(Exception e){
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+    }
 }
