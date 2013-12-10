@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+/twitface_ws_FO_MABM/nbproject/private/
+/twitface_ws_FO_MABM/build/
+/twitface_ws_FO_MABM/dist/
