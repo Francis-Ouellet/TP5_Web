@@ -21,6 +21,9 @@ public class UtilitaireTwitface {
         String nomDS = "jdbc/twitface";
         RequeteBD reqBD = new RequeteBD(nomDS);
         try{
+            
+            reqBD.obtenirConnexion();
+            
             String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
                     " FROM membres " +
                     " WHERE MemNom LIKE '%" + nom.trim() + "%'" + 
@@ -29,7 +32,9 @@ public class UtilitaireTwitface {
             
             ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
             
-            ArrayList lstMembresTrouves = new ArrayList();
+            reqBD.fermerConnexion();
+            
+            ArrayList<Membre> lstMembresTrouves = new ArrayList<Membre>();
             
             Membre membre;
             
@@ -50,5 +55,5 @@ public class UtilitaireTwitface {
         }
         
     }
-    
+        
 }
