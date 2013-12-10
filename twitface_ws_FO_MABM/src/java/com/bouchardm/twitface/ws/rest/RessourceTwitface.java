@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.bouchardm.twitface.ws.rest;
 
 import java.util.ArrayList;
@@ -29,15 +25,7 @@ import javax.ws.rs.core.Response;
 @Path("twitface")
 public class RessourceTwitface {
 
-    @Context
-    private UriInfo context;
-
-    /**
-     * Creates a new instance of RessourceTwitface
-     */
-    public RessourceTwitface() {
-    }
-
+    
     /**
      * Retrieves representation of an instance of com.bouchardm.twitface.ws.rest.RessourceTwitface
      * @return an instance of java.lang.String
@@ -58,14 +46,5 @@ public class RessourceTwitface {
         }
         
     }
-
-    /**
-     * PUT method for updating or creating an instance of RessourceTwitface
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
-    @PUT
-    @Consumes("application/xml")
-    public void putXml(String content) {
-    }
+    
 }

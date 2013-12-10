@@ -21,7 +21,7 @@ public class UtilitaireTwitface {
         String nomDS = "jdbc/twitface";
         RequeteBD reqBD = new RequeteBD(nomDS);
         try{
-        String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
+            String sqlReq = "SELECT MemNom, MemVilleOrigine, MemVilleActuelle, MemCourriel, MemNomUtil " +
                     " FROM membres " +
                     " WHERE MemNom LIKE '%" + nom.trim() + "%'" + 
                     " ORDER BY MemNom" +

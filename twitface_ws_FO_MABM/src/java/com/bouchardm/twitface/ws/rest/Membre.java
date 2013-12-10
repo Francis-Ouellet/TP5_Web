@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement(name="membre")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Membre {
+class Membre {
     
     @XmlElement
     private String nom;
@@ -35,6 +35,14 @@ public class Membre {
         this.villeActuelle = villeActuelle;
         this.courriel = courriel;
         this.nomUtilisateur = nomUtilisateur;
+    }
+    
+    public Membre(){
+        this.nom = null;
+        this.villeOrigine = null;
+        this.villeActuelle = null;
+        this.courriel = null;
+        this.nomUtilisateur = null;
     }
     
     /**
