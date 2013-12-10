@@ -37,14 +37,11 @@ public class RessourceTwitface {
         @DefaultValue("10") @QueryParam("max") int max, @DefaultValue("") @QueryParam("nom") String nom) 
     {
         try {
-            ArrayList<Membre> membres = UtilitaireTwitface.obtenirListeMembres(debut, max, nom);
-            
+            ArrayList<Membre> membres = UtilitaireTwitface.obtenirListeMembres((int)debut, (int)max, nom);
             return membres;
         }
         catch(Exception e){
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        
-    }
-    
+    } 
 }
