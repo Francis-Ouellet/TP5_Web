@@ -14,22 +14,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Marc-Antoine Bouchard M & Francis Ouellet
  */
-@XmlRootElement(name = "Membres")
+@XmlRootElement(name = "membres")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ListeMembre {
 
-    @XmlElement(name = "Membre")
+    @XmlElement(name = "membre")
     private ArrayList<Membre> lesMembres = new ArrayList<Membre>();
 
     public ListeMembre() {
         this.lesMembres = new ArrayList<Membre>();
     }
-    
-    public int nbBourses() {
-        return this.getLesBourse().size();
-    }
 
-    public ArrayList<Membre> getLesBourse() {
+    public ArrayList<Membre> getLesMembres() {
         return lesMembres;
     }
 

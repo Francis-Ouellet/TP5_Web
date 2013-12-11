@@ -21,12 +21,12 @@ import com.sun.jersey.api.client.WebResource;
  *
  * @author Marc-Antoine
  */
-public class MembresClient {
+public class MembresClients {
     private WebResource webResource;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/WEB-INF/webresources";
+    private static final String BASE_URI = "http://localhost:8080/build/webresources";
 
-    public MembresClient() {
+    public MembresClients() {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         client = Client.create(config);
         webResource = client.resource(BASE_URI).path("twitface");

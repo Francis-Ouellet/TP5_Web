@@ -16,10 +16,9 @@
     <body>
         <h1>Affichage des utilisateurs</h1>
         
-        <c:forEach var="enreg" items="${lesMembres.rows}">
-          ${enreg.MemNomUtil}
+        <c:forEach var="enreg" items="${lesMembres}">
+          ${enreg.nom}<br />
         </c:forEach>
-
 
     </body>
 </html>
