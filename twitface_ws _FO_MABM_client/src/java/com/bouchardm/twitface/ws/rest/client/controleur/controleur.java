@@ -36,11 +36,12 @@ public class controleur extends HttpServlet {
             String uri = request.getRequestURI();
             String url = uri.substring(request.getContextPath().length()+1);
             
-            MembresClient membre = new MembresClient();
+            MembresClients membre = new MembresClients();
             
             ListeMembre lstMembres = membre.obtenirMembres(ListeMembre.class, null, null, null);
             
-            request.setAttribute("lesMembres", lstMembres);
+            request.setAttribute("lesMembres", lstMembres.getLesMembres());
+            
             request.getRequestDispatcher("/WEB-INF/gabarit.jsp").forward(request, response);
 
 
