@@ -18,8 +18,11 @@ public class UtilitaireTwitface {
     
     public static ArrayList<Membre> obtenirListeMembres(int debut, int max, String nom){
         
+        int upperBound = debut + max;
+        
         String nomDS = "jdbc/twitface";
         RequeteBD reqBD = new RequeteBD(nomDS);
+        
         try{
             
             reqBD.obtenirConnexion();
@@ -28,7 +31,7 @@ public class UtilitaireTwitface {
                     " FROM membres " +
                     " WHERE MemNom LIKE '%" + nom.trim() + "%'" + 
                     " ORDER BY MemNom" +
-                    " LIMIT " + debut + "," + max;
+                    " LIMIT " + debut + "," + upperBound;
             
             reqBD.obtenirConnexion();      
             ResultSet resReq = reqBD.executerRequeteSelect(sqlReq);
@@ -57,5 +60,5 @@ public class UtilitaireTwitface {
         }
         
     }
-        
+            
 }
