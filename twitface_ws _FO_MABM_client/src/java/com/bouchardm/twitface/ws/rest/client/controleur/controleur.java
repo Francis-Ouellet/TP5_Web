@@ -5,6 +5,7 @@
 package com.bouchardm.twitface.ws.rest.client.controleur;
 
 import com.bouchardm.twitface.ws.rest.client.*;
+import com.bouchardm.twitface.ws.rest.client.modele.ModeleRechMembres;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Marc-Antoine
+ * @author Marc-Antoine Bouchard M & Francis Ouellet
  */
 public class controleur extends HttpServlet {
 
@@ -36,9 +37,11 @@ public class controleur extends HttpServlet {
             String uri = request.getRequestURI();
             String url = uri.substring(request.getContextPath().length()+1);
             
-            MembresClient membre = new MembresClient();
+            ModeleRechMembres modele = new ModeleRechMembres();
             
-            ListeMembre lstMembres = membre.obtenirMembres(ListeMembre.class, null, null, null);
+            
+            ListeMembre lstMembres = modele.obtenirMembres(request.getParameter("debut"), 
+                request.getParameter("max"), request.getParameter("nom"));
             
             request.setAttribute("lesMembres", lstMembres);
             request.getRequestDispatcher("/WEB-INF/gabarit.jsp").forward(request, response);

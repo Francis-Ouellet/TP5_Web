@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Marc-Antoine
+ * @author Marc-Antoine Bouchard M & Francis Ouellet
  */
 @XmlRootElement(name = "Membres")
 @XmlAccessorType(XmlAccessType.FIELD)
