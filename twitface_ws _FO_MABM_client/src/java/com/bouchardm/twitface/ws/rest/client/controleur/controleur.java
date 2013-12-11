@@ -4,8 +4,11 @@
  */
 package com.bouchardm.twitface.ws.rest.client.controleur;
 
+import com.bouchardm.twitface.ws.rest.client.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,27 +32,17 @@ public class controleur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-                String uri = request.getRequestURI();
-		String url = uri.substring(request.getContextPath().length());
-                
-                String vue = null;
-                String vueContenu = null;
-		String vueSousTitre = null;
+            
+            String uri = request.getRequestURI();
+            String url = uri.substring(request.getContextPath().length()+1);
+            
+            MembresClient membre = new MembresClient();
+            
+            ListeMembre lstMembres = membre.obtenirMembres(ListeMembre.class, null, null, null);
+            
+            request.setAttribute("lesMembres", lstMembres);
+            request.getRequestDispatcher("/WEB-INF/gabarit.jsp").forward(request, response);
 
-		if (url.equals("/") || url.equals("")) {
-                    vue = "/WEB-INF/gabarit.jsp";
-
-                    // Connexion
-                    // =========
-                    request.getRequestDispatcher(vue).forward(request, response);
-		} 
-			
-		else {
-			
-                    response.sendError(404);
-
-		}  
 
 
     }
