@@ -33,11 +33,27 @@ public class RessourceTwitface {
     @GET
     @Path("/membres")
     @Produces("application/xml")
-    public ArrayList<Membre> obtenirMembres(@DefaultValue("0") @QueryParam("debut") int debut,
-        @DefaultValue("10") @QueryParam("max") int max, @DefaultValue("") @QueryParam("nom") String nom) 
+    public ArrayList<Membre> obtenirMembres(@DefaultValue("0") @QueryParam("debut") String debut,
+        @DefaultValue("10") @QueryParam("max") String max, @DefaultValue("") @QueryParam("nom") String nom) 
     {
+        int i_debut, i_max;
+        
+        // Test s'il s'agit bien d'un nombre
+        try{
+            i_debut = Integer.parseInt(debut.trim());
+        }
+        catch(Exception e){
+            i_debut = 0;
+        }
+        try{
+            i_max = Integer.parseInt(max.trim());
+        }
+        catch(Exception e){
+            i_max = 10;
+        }
+        
         try {
-            ArrayList<Membre> membres = UtilitaireTwitface.obtenirListeMembres((int)debut, (int)max, nom);
+            ArrayList<Membre> membres = UtilitaireTwitface.obtenirListeMembres(i_debut, i_max, nom);
             return membres;
         }
         catch(Exception e){
