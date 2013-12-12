@@ -17,9 +17,23 @@ import javax.ws.rs.core.Response;
  */
 public class UtilitaireTwitface {
     
-    public static ArrayList<Membre> obtenirListeMembres(int debut, int max, String nom){
+    public static ArrayList<Membre> obtenirListeMembres(String debut, String max, String nom){
         
-        int upperBound = debut + max;
+        int i_debut, i_max;
+        
+        // Test s'il s'agit bien d'un nombre
+        try{
+            i_debut = Integer.parseInt(debut.trim());
+        }
+        catch(Exception e){
+            i_debut = 0;
+        }
+        try{
+            i_max = Integer.parseInt(max.trim());
+        }
+        catch(Exception e){
+            i_max = 10;
+        }
         
         String nomDS = "jdbc/twitface";
         RequeteBD reqBD = new RequeteBD(nomDS);
@@ -32,7 +46,7 @@ public class UtilitaireTwitface {
                     " FROM membres " +
                     " WHERE MemNom LIKE '%" + nom.trim() + "%'" + 
                     " ORDER BY MemNom" +
-                    " LIMIT " + debut + "," + upperBound;
+                    " LIMIT " + i_debut + "," + i_max;
             
             reqBD.obtenirConnexion();      
 

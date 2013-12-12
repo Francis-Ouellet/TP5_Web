@@ -19,6 +19,14 @@
         <c:forEach var="enreg" items="${lesMembres}">
           ${enreg.nom}<br />
         </c:forEach>
+          
+        <c:if test="${requestScope['precedent']}">
+            <input type="button" value="Précédent" />
+        </c:if>
 
+        <c:if test="${requestScope['suivant']}">
+            <input type="button" value="Suivant" />
+        </c:if>
+            
     </body>
 </html>

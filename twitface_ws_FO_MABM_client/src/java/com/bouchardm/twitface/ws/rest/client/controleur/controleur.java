@@ -39,10 +39,7 @@ public class controleur extends HttpServlet {
             
             ModeleRechMembres modele = new ModeleRechMembres();
             
-            ListeMembre lstMembres = modele.obtenirMembres(request.getParameter("debut"), 
-                request.getParameter("max"), request.getParameter("nom"));
-            
-            request.setAttribute("lesMembres", lstMembres.getLesMembres());
+            modele.obtenirMembres(request);
             
             request.getRequestDispatcher("/WEB-INF/gabarit.jsp").forward(request, response);
 

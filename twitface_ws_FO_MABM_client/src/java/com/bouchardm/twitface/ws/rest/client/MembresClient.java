@@ -13,20 +13,20 @@ import com.sun.jersey.api.client.WebResource;
  * [twitface]<br>
  *  USAGE:
  * <pre>
- *        MembresClients client = new MembresClients();
+ *        MembresClient client = new MembresClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
  * </pre>
  *
- * @author Marc-Antoine
+ * @author owner
  */
-public class MembresClients {
+public class MembresClient {
     private WebResource webResource;
     private Client client;
     private static final String BASE_URI = "http://localhost:8080/build/webresources";
 
-    public MembresClients() {
+    public MembresClient() {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         client = Client.create(config);
         webResource = client.resource(BASE_URI).path("twitface");
